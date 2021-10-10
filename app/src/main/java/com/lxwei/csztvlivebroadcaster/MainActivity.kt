@@ -3,28 +3,33 @@ package com.lxwei.csztvlivebroadcaster
 import android.os.Bundle
 import android.view.KeyEvent
 import androidx.activity.ComponentActivity
-import androidx.activity.OnBackPressedCallback
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
-import com.lxwei.csztvlivebroadcaster.ui.presentation.LivePlayer
 import com.lxwei.csztvlivebroadcaster.ui.presentation.LivePlayerScreen
 import com.lxwei.csztvlivebroadcaster.ui.theme.CSZTVLiveBroadcasterTheme
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class MainActivity() : ComponentActivity() {
+class MainActivity : ComponentActivity() {
     private val viewModel by viewModels<MainViewModel>()
+
+    lateinit var livePlayer: LivePlayer
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        // TODO: Use DI to create the live player
+        livePlayer = LivePlayer(applicationContext) {
+            viewModel.refresh()
+        }
 
         setContent {
             CSZTVLiveBroadcasterTheme {
                 // A surface container using the 'background' color from the theme
                 Surface(color = MaterialTheme.colors.background) {
-                    LivePlayerScreen(viewModel)
+                    LivePlayerScreen(viewModel, livePlayer)
                 }
             }
         }

@@ -26,25 +26,34 @@ class MainViewModel
     private var currentChannelIndex = 0
 
     init {
-        _currentUrl.value = liveChannels[currentChannelIndex]
+        update()
     }
 
     private fun getLiveChannels() = runBlocking {
         channelRepo.getLiveChannels()
     }
 
+    fun refresh() {
+        liveChannels = getLiveChannels()
+        update()
+    }
+
+    private fun update() {
+        _currentUrl.value = liveChannels[currentChannelIndex]
+    }
+
     fun previousChannel() {
         currentChannelIndex -= 1
         if (currentChannelIndex < 0) currentChannelIndex = liveChannels.size - 1
         Timber.i("Prev channel $currentChannelIndex/${liveChannels.size}")
-        _currentUrl.value = liveChannels[currentChannelIndex]
+        update()
     }
 
     fun nextChannel() {
         currentChannelIndex += 1
         if (currentChannelIndex >= liveChannels.size) currentChannelIndex = 0
         Timber.i("Next channel: $currentChannelIndex/${liveChannels.size}")
-        _currentUrl.value = liveChannels[currentChannelIndex]
+        update()
     }
 
     fun stopPlayer() {

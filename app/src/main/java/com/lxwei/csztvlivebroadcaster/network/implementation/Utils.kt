@@ -1,5 +1,6 @@
 package com.lxwei.csztvlivebroadcaster.network.implementation
 
+import com.lxwei.csztvlivebroadcaster.network.domain.Constants
 import java.security.MessageDigest
 import java.util.*
 import java.util.concurrent.TimeUnit
@@ -12,7 +13,7 @@ object Utils {
      * @param n The length of targeted string
      * @return the random string
      */
-    fun randomString(n: Int): String {
+    private fun randomString(n: Int): String {
         val charPool = ('A'..'Z') + ('a'..'z') + ('0'..'9')
         return (1..n)
             .map { charPool.random() }
@@ -31,8 +32,8 @@ object Utils {
      *
      */
     fun getSignature(versionName: String, random: String): String {
-        val apiKey = "eecca5b6365d9607ee5a9d336962c534"
-        val magic = "eUxzMWNSM2l4RHR3SDVyaXNPT1pLZDVVWWZOVkR2UzI="
+        val apiKey = Constants.HEADERS_API_KEY
+        val magic = Constants.SIGNATURE_MAGIC
         val signString = "$apiKey&$magic&${versionName}&$random"
 
         val sha1 = MessageDigest.getInstance("SHA-1")

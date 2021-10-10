@@ -4,6 +4,9 @@ import retrofit2.http.GET
 import retrofit2.http.HeaderMap
 import retrofit2.http.QueryMap
 
+/**
+ * Interface to get the channel information
+ */
 interface ChannelService {
     @GET("szh/channel.php")
     suspend fun getLiveChannels(
