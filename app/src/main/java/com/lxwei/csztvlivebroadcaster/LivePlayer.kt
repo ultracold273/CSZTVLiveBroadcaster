@@ -17,7 +17,7 @@ class LivePlayer @Inject constructor(
     private val errorHandler: () -> Unit,
 ) {
     private val _player = SimpleExoPlayer.Builder(context).build().apply {
-        addListener (
+        addListener(
             object : Player.Listener {
                 override fun onPlayerError(error: PlaybackException) {
                     if (error is ExoPlaybackException && error.type == TYPE_SOURCE) {

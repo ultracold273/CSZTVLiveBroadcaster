@@ -16,7 +16,7 @@ class RetrofitServiceFactory constructor(
     /**
      *
      */
-    override fun <T> initializeService(clazz: Class<T>): Deferred<T> {
+    override fun <T> initializeServiceAsync(clazz: Class<T>): Deferred<T> {
         return CoroutineScope(ioDispatcher).async(start = CoroutineStart.LAZY) {
             initializeRetrofit(urlProvider.getBaseUrl()).create(clazz)
         }

@@ -41,7 +41,7 @@ abstract class NetworkModule {
             serviceFactory: INetworkServiceFactory
         ): ReadOnlyCachingFactory<ChannelService> {
             return ReadOnlyCachingFactory(
-                serviceFactory.initializeService(ChannelService::class.java)
+                serviceFactory.initializeServiceAsync(ChannelService::class.java)
             )
         }
     }
