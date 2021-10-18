@@ -16,11 +16,8 @@ class MainViewModel
     private val channelRepo: ChannelInfoRepo
 ) : ViewModel() {
 
-    private var _currentUrl = MutableLiveData("")
-    val currentUrl: LiveData<String> = _currentUrl
-
-    private var _playerClose = MutableLiveData(false)
-    val playerClose: LiveData<Boolean> = _playerClose
+    private var _playerAction = MutableLiveData<PlayerAction>(PlayerAction.EmptyAction)
+    val playerAction: LiveData<PlayerAction> = _playerAction
 
     private var liveChannels = getLiveChannels()
     private var currentChannelIndex = 0
@@ -39,7 +36,7 @@ class MainViewModel
     }
 
     private fun update() {
-        _currentUrl.value = liveChannels[currentChannelIndex]
+        _playerAction.value = PlayerAction.UpdateAction(liveChannels[currentChannelIndex])
     }
 
     fun previousChannel() {
@@ -57,10 +54,10 @@ class MainViewModel
     }
 
     fun stopPlayer() {
-        _playerClose.value = true
+        _playerAction.value = PlayerAction.StopAction
     }
 
     fun resumePlayer() {
-        _playerClose.value = false
+        update()
     }
 }

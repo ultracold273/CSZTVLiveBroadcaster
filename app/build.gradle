@@ -6,7 +6,6 @@ plugins {
 }
 
 android {
-    
     compileSdk 31
 
     defaultConfig {
@@ -20,7 +19,6 @@ android {
         vectorDrawables {
             useSupportLibrary true
         }
-
     }
 
     buildTypes {

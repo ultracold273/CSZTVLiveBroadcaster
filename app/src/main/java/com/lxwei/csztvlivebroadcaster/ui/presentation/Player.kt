@@ -7,15 +7,24 @@ import com.google.android.exoplayer2.ExoPlayer
 import com.google.android.exoplayer2.ui.PlayerView
 import com.lxwei.csztvlivebroadcaster.LivePlayer
 import com.lxwei.csztvlivebroadcaster.MainViewModel
+import com.lxwei.csztvlivebroadcaster.PlayerAction
 
 @Composable
 fun LivePlayerScreen(viewModel: MainViewModel, player: LivePlayer) {
-    val hlsUrl by viewModel.currentUrl.observeAsState("")
-    val close by viewModel.playerClose.observeAsState(false)
+    val action by viewModel.playerAction.observeAsState(initial = PlayerAction.EmptyAction)
 
-    LaunchedEffect(hlsUrl, close) {
-        if (close) player.pause()
-        else player.play(hlsUrl)
+    LaunchedEffect(action) {
+        when (action) {
+            is PlayerAction.StopAction -> {
+                player.pause()
+            }
+            is PlayerAction.UpdateAction -> {
+                player.play((action as PlayerAction.UpdateAction).url)
+            }
+            else -> {
+
+            }
+        }
     }
 
     LivePlayerView(player.player)
