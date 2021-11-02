@@ -6,14 +6,6 @@ plugins {
 }
 
 android {
-    signingConfigs {
-        release {
-            storeFile file('D:\\Projects\\Android\\Keys\\android-application.jks')
-            storePassword 'weilix'
-            keyAlias 'key0'
-            keyPassword 'weilix'
-        }
-    }
 
     compileSdk 31
 
@@ -28,7 +20,6 @@ android {
         vectorDrawables {
             useSupportLibrary true
         }
-        signingConfig signingConfigs.release
     }
 
     buildTypes {
