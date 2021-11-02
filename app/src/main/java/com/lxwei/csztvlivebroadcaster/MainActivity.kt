@@ -7,6 +7,7 @@ import androidx.activity.compose.setContent
 import androidx.activity.viewModels
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
+import com.lxwei.csztvlivebroadcaster.player.LivePlayer
 import com.lxwei.csztvlivebroadcaster.ui.presentation.LivePlayerScreen
 import com.lxwei.csztvlivebroadcaster.ui.theme.CSZTVLiveBroadcasterTheme
 import dagger.hilt.android.AndroidEntryPoint
@@ -15,7 +16,7 @@ import dagger.hilt.android.AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     private val viewModel by viewModels<MainViewModel>()
 
-    lateinit var livePlayer: LivePlayer
+    private lateinit var livePlayer: LivePlayer
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

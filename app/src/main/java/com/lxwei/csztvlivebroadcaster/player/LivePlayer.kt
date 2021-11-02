@@ -1,4 +1,4 @@
-package com.lxwei.csztvlivebroadcaster
+package com.lxwei.csztvlivebroadcaster.player
 
 import android.content.Context
 import com.google.android.exoplayer2.*
@@ -10,7 +10,6 @@ import com.google.android.exoplayer2.util.Util
 import dagger.hilt.android.qualifiers.ApplicationContext
 import timber.log.Timber
 import javax.inject.Inject
-
 
 class LivePlayer @Inject constructor(
     @ApplicationContext private val context: Context,
@@ -58,6 +57,6 @@ class LivePlayer @Inject constructor(
             prepare()
         }
 
-        Timber.i("I prepared the source")
+        Timber.i("Player is playing $uri")
     }
 }

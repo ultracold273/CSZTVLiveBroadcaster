@@ -1,4 +1,4 @@
-package com.lxwei.csztvlivebroadcaster
+package com.lxwei.csztvlivebroadcaster.player
 
 sealed class PlayerAction {
     object EmptyAction : PlayerAction()
