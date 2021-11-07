@@ -1,8 +1,12 @@
 package com.lxwei.csztvlivebroadcaster.player
 
 import android.content.Context
-import com.google.android.exoplayer2.*
+import com.google.android.exoplayer2.ExoPlaybackException
 import com.google.android.exoplayer2.ExoPlaybackException.TYPE_SOURCE
+import com.google.android.exoplayer2.MediaItem
+import com.google.android.exoplayer2.PlaybackException
+import com.google.android.exoplayer2.Player
+import com.google.android.exoplayer2.SimpleExoPlayer
 import com.google.android.exoplayer2.source.hls.HlsMediaSource
 import com.google.android.exoplayer2.upstream.DefaultDataSourceFactory
 import com.google.android.exoplayer2.util.MimeTypes
@@ -11,6 +15,12 @@ import dagger.hilt.android.qualifiers.ApplicationContext
 import timber.log.Timber
 import javax.inject.Inject
 
+/**
+ * A player class wraps the [SimpleExoPlayer]
+ *
+ * @param context The application context
+ * @param errorHandler The callback when any error occurs
+ */
 class LivePlayer @Inject constructor(
     @ApplicationContext private val context: Context,
     private val errorHandler: () -> Unit,

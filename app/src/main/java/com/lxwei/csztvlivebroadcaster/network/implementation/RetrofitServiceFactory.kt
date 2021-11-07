@@ -11,7 +11,7 @@ class RetrofitServiceFactory constructor(
     private val urlProvider: IUrlProvider,
     private val ioDispatcher: CoroutineDispatcher,
     private val moshi: Moshi = DefaultMoshi.instance
-): INetworkServiceFactory {
+) : INetworkServiceFactory {
 
     /**
      *

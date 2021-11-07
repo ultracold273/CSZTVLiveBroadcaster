@@ -1,6 +1,6 @@
 package com.lxwei.csztvlivebroadcaster.network.implementation
 
-import com.lxwei.csztvlivebroadcaster.network.domain.Constants
+import com.lxwei.csztvlivebroadcaster.network.domain.GetChannelConstants
 import java.security.MessageDigest
 import java.util.*
 import java.util.concurrent.TimeUnit
@@ -32,8 +32,8 @@ object Utils {
      *
      */
     fun getSignature(versionName: String, random: String): String {
-        val apiKey = Constants.HEADERS_API_KEY
-        val magic = Constants.SIGNATURE_MAGIC
+        val apiKey = GetChannelConstants.HEADERS_API_KEY
+        val magic = GetChannelConstants.SIGNATURE_MAGIC
         val signString = "$apiKey&$magic&${versionName}&$random"
 
         val sha1 = MessageDigest.getInstance("SHA-1")

@@ -1,5 +1,8 @@
 package com.lxwei.csztvlivebroadcaster.player
 
+/**
+ * Player actions that a user may take when using the D-pad controller
+ */
 sealed class PlayerAction {
     object EmptyAction : PlayerAction()
 

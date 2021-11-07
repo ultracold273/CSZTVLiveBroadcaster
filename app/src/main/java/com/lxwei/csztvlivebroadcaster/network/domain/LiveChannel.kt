@@ -3,6 +3,9 @@ package com.lxwei.csztvlivebroadcaster.network.domain
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 
+/**
+ * Data class for hosting response from get channel service
+ */
 @JsonClass(generateAdapter = true)
 data class LiveChannel (
     val id: String,
