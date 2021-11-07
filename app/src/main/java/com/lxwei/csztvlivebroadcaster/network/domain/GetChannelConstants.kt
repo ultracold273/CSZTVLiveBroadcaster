@@ -1,6 +1,9 @@
 package com.lxwei.csztvlivebroadcaster.network.domain
 
-object Constants {
+/**
+ * Constants used in Retrofit get channel call to HLS service.
+ */
+object GetChannelConstants {
     const val CHANNEL_URL = "https://mobile.kan0512.com/"
 
     const val HEADERS_USER_AGNET = "Dalvik/2.1.0 (Linux; U; Android 7.1.2; Redmi 4A MIUI/V10.2.3.0.NCCMIXM) m2oSmartCity_useragent 1.0.0"

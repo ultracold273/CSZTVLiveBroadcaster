@@ -2,8 +2,13 @@ package com.lxwei.csztvlivebroadcaster.dependency.module
 
 import com.lxwei.csztvlivebroadcaster.dependency.qualifier.EndpointName
 import com.lxwei.csztvlivebroadcaster.dependency.qualifier.IoDispatcher
-import com.lxwei.csztvlivebroadcaster.network.domain.*
-import com.lxwei.csztvlivebroadcaster.network.implementation.*
+import com.lxwei.csztvlivebroadcaster.network.domain.ChannelService
+import com.lxwei.csztvlivebroadcaster.network.domain.Endpoint
+import com.lxwei.csztvlivebroadcaster.network.domain.INetworkServiceFactory
+import com.lxwei.csztvlivebroadcaster.network.domain.IUrlProvider
+import com.lxwei.csztvlivebroadcaster.network.implementation.ChannelServiceUrlProvider
+import com.lxwei.csztvlivebroadcaster.network.implementation.ReadOnlyCachingFactory
+import com.lxwei.csztvlivebroadcaster.network.implementation.RetrofitServiceFactory
 import dagger.Binds
 import dagger.Module
 import dagger.Provides
