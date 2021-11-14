@@ -14,6 +14,7 @@ class ChannelInfoRepo
     private val queryProvider: ChannelServiceQueryProvider
 ) {
     suspend fun getLiveChannels(): List<String> {
+        Timber.i("Updating Channels")
         val response = service.getValue().getLiveChannels(
             headerProvider.getHeaders(),
             queryProvider.getQueries()

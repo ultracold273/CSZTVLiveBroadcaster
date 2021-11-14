@@ -4,10 +4,15 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.lxwei.csztvlivebroadcaster.player.PlayerAction
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 import timber.log.Timber
+import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
 @HiltViewModel
@@ -20,23 +25,29 @@ class MainViewModel
     private var _playerAction = MutableLiveData<PlayerAction>(PlayerAction.EmptyAction)
     val playerAction: LiveData<PlayerAction> = _playerAction
 
-    private var liveChannels = getLiveChannels()
+    private lateinit var liveChannels: List<String>
     private var currentChannelIndex = 0
 
     init {
-        update()
+        viewModelScope.launch(Dispatchers.IO) {
+            while (true) {
+                refresh()
+                delay(TimeUnit.MINUTES.toMillis(20))
+            }
+        }
     }
 
-    private fun getLiveChannels() = runBlocking {
-        channelRepo.getLiveChannels()
+    private suspend fun getLiveChannels(): List<String> {
+        return channelRepo.getLiveChannels()
     }
 
-    fun refresh() {
+    fun refresh() = runBlocking {
         liveChannels = getLiveChannels()
-        update()
+        _playerAction.postValue(PlayerAction.UpdateAction(liveChannels[currentChannelIndex]))
     }
 
     private fun update() {
+        Timber.i("Updating liveChannels")
         _playerAction.value = PlayerAction.UpdateAction(liveChannels[currentChannelIndex])
     }
 
@@ -59,6 +70,8 @@ class MainViewModel
     }
 
     fun resumePlayer() {
-        update()
+        if (::liveChannels.isInitialized) {
+            update()
+        }
     }
 }
