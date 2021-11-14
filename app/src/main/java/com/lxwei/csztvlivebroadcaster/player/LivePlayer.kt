@@ -12,6 +12,7 @@ import com.google.android.exoplayer2.upstream.DefaultDataSourceFactory
 import com.google.android.exoplayer2.util.MimeTypes
 import com.google.android.exoplayer2.util.Util
 import dagger.hilt.android.qualifiers.ApplicationContext
+import kotlinx.coroutines.runBlocking
 import timber.log.Timber
 import javax.inject.Inject
 
@@ -30,6 +31,7 @@ class LivePlayer @Inject constructor(
             object : Player.Listener {
                 override fun onPlayerError(error: PlaybackException) {
                     if (error is ExoPlaybackException && error.type == TYPE_SOURCE) {
+                        Timber.i("ExoPlaybackException happens: $error")
                         errorHandler.invoke()
                         return
                     }
